@@ -8,3 +8,6 @@ Helpful links:
 * https://community.auth0.com/t/scope-permission-not-included-in-jwt/28428/4
 * https://github.com/davidfowl/TodoApi
 * 
+
+Permissions, Privileges and Scopes: 
+* https://auth0.com/blog/permissions-privileges-and-scopes/
