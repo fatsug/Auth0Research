@@ -11,3 +11,6 @@ Helpful links:
 
 Permissions, Privileges and Scopes: 
 * https://auth0.com/blog/permissions-privileges-and-scopes/
+
+Role-Based authorization in ASP.Net Core:
+* https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-7.0&viewFallbackFrom=aspnetcore-2.1
