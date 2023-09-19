@@ -7,7 +7,7 @@ Helpful links:
 * https://auth0.com/docs/quickstart/backend/aspnet-core-webapi
 * https://community.auth0.com/t/scope-permission-not-included-in-jwt/28428/4
 * https://github.com/davidfowl/TodoApi
-* 
+* https://dotnetcoretutorials.com/using-auth0-with-an-asp-net-core-api-part-3-swagger/?expand_article=1
 
 Permissions, Privileges and Scopes: 
 * https://auth0.com/blog/permissions-privileges-and-scopes/
