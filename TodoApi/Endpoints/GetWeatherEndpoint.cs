@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using FastEndpoints;
 
 namespace TodoApi.Endpoints;
@@ -29,15 +28,6 @@ public class GetWeatherEndpoint : EndpointWithoutRequest<IEnumerable<WeatherFore
 
         await SendAsync(forecast, cancellation: ct);
     }
-    
-    // app.MapGet("/weatherforecast", (ClaimsPrincipal user) =>
-    // {
-    //     var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-    //     
-    // })
-    // .WithName("GetWeatherForecast")
-    //     .WithOpenApi()
-    //     .RequireAuthorization("weather:read-write");
 }
 
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

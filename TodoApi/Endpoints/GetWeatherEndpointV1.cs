@@ -31,13 +31,4 @@ public class GetWeatherEndpointV1 : EndpointWithoutRequest<WeatherForecast>
         if (forecast is null) return;
         await SendAsync(forecast, cancellation: ct);
     }
-
-    // app.MapGet("/weatherforecast", (ClaimsPrincipal user) =>
-    // {
-    //     var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-    //     
-    // })
-    // .WithName("GetWeatherForecast")
-    //     .WithOpenApi()
-    //     .RequireAuthorization("weather:read-write");
 }
