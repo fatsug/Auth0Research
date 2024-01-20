@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text;
+using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +13,40 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddFastEndpoints();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services
+    .SwaggerDocument(o =>
+    {
+        o.DocumentSettings = s =>
+        {
+            s.DocumentName = "Initial Release";
+            s.Title = "my api";
+            s.Version = "v0";
+        };
+    })
+    .SwaggerDocument(o =>
+    {
+        o.MaxEndpointVersion = 1;
+        o.DocumentSettings = s =>
+        {
+            s.DocumentName = "Release 1.0";
+            s.Title = "my api";
+            s.Version = "v1.0";
+        };
+    })
+    .SwaggerDocument(o =>
+    {
+        o.MaxEndpointVersion = 2;
+        o.DocumentSettings = s =>
+        {
+            s.DocumentName = "Release 2.0";
+            s.Title = "my api";
+            s.Version = "v2.0";
+        };
+    });
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -108,33 +143,9 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-var summaries = new[]
+app.UseFastEndpoints(c =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", (ClaimsPrincipal user) =>
-    {
-        var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-        
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi()
-    .RequireAuthorization("weather:read-write");
-
+    c.Versioning.Prefix = "v";
+});
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
-}

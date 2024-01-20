@@ -5,15 +5,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace TodoApi.Swagger;
 
-public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+public class ConfigureSwaggerOptions(IConfiguration configuration) : IConfigureOptions<SwaggerGenOptions>
 {
-    private IConfiguration _configuration;
-
-    public ConfigureSwaggerOptions(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     // public void Configure(SwaggerGenOptions options)
     // {
     //     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -52,10 +45,10 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             {
                 Implicit = new OpenApiOAuthFlow
                 {
-                    TokenUrl = new Uri($"https://{_configuration["Auth0:Domain"]}/oauth/token"),
+                    TokenUrl = new Uri($"https://{configuration["Auth0:Domain"]}/oauth/token"),
                     AuthorizationUrl =
                         new Uri(
-                            $"https://{_configuration["Auth0:Domain"]}/authorize?audience={_configuration["Auth0:Audience"]}"),
+                            $"https://{configuration["Auth0:Domain"]}/authorize?audience={configuration["Auth0:Audience"]}"),
                     Scopes = new Dictionary<string, string>
                     {
                         {"openid", "OpenId"},
