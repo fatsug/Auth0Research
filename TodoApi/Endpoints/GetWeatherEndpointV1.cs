@@ -8,7 +8,7 @@ public class GetWeatherEndpointV1 : EndpointWithoutRequest<WeatherForecast>
     public override void Configure()
     {
         Get("/weatherforecast");
-        Policies("weather:read-write");
+        AllowAnonymous();
         Version(1);
     }
 

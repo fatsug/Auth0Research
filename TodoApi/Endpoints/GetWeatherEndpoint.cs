@@ -7,7 +7,7 @@ public class GetWeatherEndpoint : EndpointWithoutRequest<IEnumerable<WeatherFore
     public override void Configure()
     {
         Get("/weatherforecast");
-        Policies("weather:read-write");
+        Policies("ReadWeatherForecasts");
     }
 
     public override async Task HandleAsync(CancellationToken ct)
